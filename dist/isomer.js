@@ -567,7 +567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  options = options || {};
 
 	  this.canvas = new Canvas(canvasId);
-	  this.angle = Math.PI / 6;
+	  this.angle = 90//Math.PI / 6;
 
 	  this.scale = options.scale || 70;
 
@@ -609,11 +609,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var xMap = new Point(point.x * this.transformation[0][0],
 	                       point.x * this.transformation[0][1]);
 
-	  var yMap = new Point(point.y * this.transformation[1][0],
-	                       point.y * this.transformation[1][1]);
+	  var yMap = new Point(point.y * this.transformation[0][0],
+	                       point.y * this.transformation[0][1]);
 
-	  var x = this.originX + xMap.x + yMap.x;
-	  var y = this.originY - xMap.y - yMap.y - (point.z * this.scale);
+	  var x = this.originX + yMap.x;
+	  var y = this.originY - xMap.y;
+    
 	  return new Point(x, y);
 	};
 
@@ -669,6 +670,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * which in theory reduces costly cos and sin calls
 	 */
 	Isomer.prototype._calculateTransformation = function() {
+    
+    
+    
+    
 	  this.transformation = [
 	    [
 	      this.scale * Math.cos(this.angle),
